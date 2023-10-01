@@ -16,7 +16,7 @@ for question in data:
         score += 1
 
 for index, question in enumerate(data):
-    message =   f'Your asnser for {index+1} was {question["user_choice"]} ' \
+    message = f'Your asnser for {index+1} was {question["user_choice"]} ' \
                 f'\nCorrect answer is {question["correct_answer"]}\n'
 
     print(message)
