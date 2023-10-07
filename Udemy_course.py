@@ -1,26 +1,5 @@
-from datetime import datetime
+from functions import *
 countries_done = []
-
-
-def read():
-    with open("data.tdo", 'r') as store_file_def:
-        countries_def = store_file_def.readlines()
-    return countries_def
-
-
-
-def write():
-    with open('data.tdo', 'w') as store_file_def:
-        store_file_def.writelines(countries)
-
-
-def pusta():
-    print('Lista jest pusta !')
-
-
-def data():
-    datadzis = datetime.now().strftime("%d / %m / %y")
-    return datadzis
 
 
 while True:
@@ -54,7 +33,7 @@ while True:
         if len(usr_input) > 1:
             # data = data()
             countries.append(data() + " " + usr_input + '\n')
-            write()
+            write(countries)
         else:
             print('Nic do dodania')
 
@@ -63,7 +42,7 @@ while True:
         try:
             if len(countries) > 0:
                 countries_done.append(countries.pop(int(input("Który element chcesz zaznaczyć jako ukończony?:"))-1))
-                write()
+                write(countries)
 
             else:
                 pusta()
@@ -83,7 +62,7 @@ while True:
         if len(countries) > 0 and len(usr[2:]) > 0:
             usr = int(usr[2:])-1
             countries[usr] = data() + str(" " + input('Podaj nową wartość:\n') + '\n')
-            write()
+            write(countries)
 
         else:
             if len(usr[2:]) > 0:
