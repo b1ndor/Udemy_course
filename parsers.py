@@ -1,13 +1,12 @@
-def parse(user_input):
-    """Extract the values split by a comma in a string
-    and return the two values via a dictionary.
-    """
-    # Get the two values in a list
-    parts = user_input.split(",")
+import PySimpleGUI as sg
 
-    # Store the two values in variables
-    lower_bound = float(parts[0])
-    upper_bound = float(parts[1])
+left_col = [[sg.Text('Folder'), sg.In(size=(25, 1), enable_events=True, key='-FOLDER-'), sg.FolderBrowse()]]
+layout = [[sg.Column(left_col, element_justification='c')]
+          window = sg.Window('Multiple Format Image Viewer', layout, resizable=True)
 
-    # Inject the values in a dictionary
-    return {"lower_bound": lower_bound, "upper_bound": upper_bound}
+while True:
+    event, values = window.read()
+    if event in (sg.WIN_CLOSED, 'Exit'):
+        break
+    if event == '-FOLDER-':
+        folder = values['-FOLDER-']  
