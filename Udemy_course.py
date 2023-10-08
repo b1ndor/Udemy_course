@@ -31,7 +31,6 @@ while True:
     if '1' in usr[0]:
         usr_input = usr.strip('1 ')
         if len(usr_input) > 1:
-            # data = data()
             countries.append(data() + " " + usr_input + '\n')
             write(countries)
         else:

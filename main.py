@@ -1,13 +1,39 @@
-from parsers import parse
-import random
+from functions import *
+from datetime import datetime
+import PySimpleGUI as Sg
 
-# Ask the user to enter a lower and an upper bound divided by a comma
-user_input = input("Enter a lower bound and an uppwer bound divided a comma (e.g., 2,10)")
+Sg.theme('DarkBlue')   # Add a touch of color
+# All the stuff inside your window.
+layout = [  [Sg.Text(datetime.now().strftime("%d / %m / %y"))],
+            [Sg.Text('Enter todo in below field')],
+            [Sg.InputText()],
+            [Sg.Button('Add'), Sg.Button('Exit'), Sg.Button('Show')]]
 
-# Parse the user string by calling the parse function
-parsed = parse(user_input)
+# Create the Window
+window = Sg.Window('ToDo List', layout)
+# Event Loop to process "events" and get the "values" of the inputs
 
-# Pick a random int between the two numbers
-rand = random.randint(parsed['lower_bound'], parsed['upper_bound'])
+try:
+    with open("data.tdo", 'r') as store_file:
+        countries = store_file.readlines()
 
-print(rand)
+except FileNotFoundError:  # This is skipped if file exists
+    with open('data.tdo', 'w') as store_file:
+        pass
+
+while True:
+    event, values = window.read()
+    if event == Sg.WIN_CLOSED or event == 'Exit': # if user closes window or clicks cancel
+        break
+    elif event == 'Show':
+        countries = read()
+        if len(countries) > 0:
+            for index, x in enumerate(countries):
+                print(f"{index + 1}  {x.strip()}")
+        else:
+            pusta()
+    elif event == 'Add':
+        countries.append((datetime.now().strftime("%d / %m / %y")+values[0]+"\n"))
+        write(countries)
+
+window.close()
