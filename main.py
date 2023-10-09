@@ -3,37 +3,31 @@ from datetime import datetime
 import PySimpleGUI as Sg
 
 Sg.theme('DarkBlue')
-layout = [[Sg.Text(datetime.now().strftime("%d / %m / %y"))],
-    [Sg.Text('Enter todo in below field')],
-    [Sg.InputText()],
-    [Sg.Button('Add'), Sg.Button('Exit'), Sg.Button('Show')]]
+layout = [[Sg.Text(datetime.now().strftime("%d / %m / %y"), font=("13"))],
+    [Sg.Text('Enter todo in below field', font=("bold, 13"))],
+    [Sg.InputText(do_not_clear=False, font=("Bold, 13"))],
+    [Sg.Button('Add', font=("Bold, 13")), Sg.Button('Exit', font=("Bold, 13")), Sg.Button('Show', font=("Bold, 13"))]]
 
 # Create the Window
 window = Sg.Window('ToDo List', layout)
 
 
-try:
-    with open("data.tdo", 'r') as store_file:
-        countries = store_file.readlines()
-
-except FileNotFoundError:  # This is skipped if file exists
-    with open('data.tdo', 'w') as store_file:
-        pass
-
 # main body of program
 while True:
     event, values = window.read()
-    if event == Sg.WIN_CLOSED or event == 'Exit':  # if user closes window or clicks cancel
-        break
-    elif event == 'Show':
-        countries = read()
-        if len(countries) > 0:
-            for index, x in enumerate(countries):
-                print(f"{index + 1}  {x.strip()}")
-        else:
-            pusta()
-    elif event == 'Add':
-        countries.append((datetime.now().strftime("%d / %m / %y")+values[1]+"\n"))
-        write(countries)
+    match event:
+        case Sg.WIN_CLOSED | 'Exit':  # if user closes window or clicks cancel
+            break
+        case 'Show':
+            countries = read()
+            if len(countries) > 0:
+                for index, x in enumerate(countries):
+                    print(f"{index + 1}  {x.strip()}")
+            else:
+                pusta()
+        case 'Add':
+            countries = read()
+            countries.append((datetime.now().strftime("%d / %m / %y") + "  "+values[0]+"\n"))
+            write(countries)
 
 window.close()

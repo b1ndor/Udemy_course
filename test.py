@@ -15,18 +15,12 @@ Layout = \
 okno = Pg.Window('Zip creator', Layout)
 while True:
     event, values = okno.read()
+    match event:
+        case 'Wykonaj':
+            okno["-TEXT-"].update(visible=True)
 
-    if event == 'Wykonaj':
-        # with zp.ZipFile(values[0], 'w') as file:
-        #     for file_name in values[0]:
-        #         file.write(file_name)
-        okno["-TEXT-"].update(visible=True)
-    if event == Pg.WIN_CLOSED or event == "Wyjście":
-        break
+        case Pg.WIN_CLOSED | "Wyjście":
+            break
 
 
 okno.close()
-
-
-# with zp.ZipFile('spam.zip', 'w') as myzip:
-#     myzip.write('data.tdo')
