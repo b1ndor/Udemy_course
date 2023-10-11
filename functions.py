@@ -12,6 +12,8 @@ def read():
     return countries
 
 
+wsad = read()
+
 def write(data):
     with open('data.tdo', 'w') as store_file_def:
         store_file_def.writelines(data)
