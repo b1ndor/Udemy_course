@@ -1,4 +1,19 @@
 from datetime import datetime
+import PySimpleGUI as Sg
+
+
+def edit(datainput):
+    layout = [[Sg.InputText(default_text=datainput, do_not_clear=False, font=10, size=50, key="edit")],
+              [Sg.Button(button_text="Ok"), Sg.Button(button_text="Cancel")]]
+    window2 = Sg.Window(title="Edit window", layout=layout)
+    while True:
+        event, values = window2.read()
+        match event:
+            case "Cancel":
+                break
+            case "Ok":
+                window2.close()
+                return values['edit']
 
 
 def read():
@@ -13,6 +28,7 @@ def read():
 
 
 wsad = read()
+
 
 def write(data):
     with open('data.tdo', 'w') as store_file_def:
