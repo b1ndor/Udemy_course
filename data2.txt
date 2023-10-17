@@ -1,4 +1,0 @@
-"Station", "Temp"
-"Kielce","23"
-"Kraków","24"
-"Skarżysko-Kamienna", "21"
