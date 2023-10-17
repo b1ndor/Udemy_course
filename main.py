@@ -7,7 +7,7 @@ Sg.theme('DarkBlue')
 firstrow = \
     [
             [Sg.Text(text='Enter todo in below field:', font=10)],
-            [Sg.InputText(do_not_clear=False, font=10, size=50), Sg.Button(button_text='Add', font=10)],
+            [Sg.InputText(do_not_clear=False, font=10, size=50, key='Add_f'), Sg.Button(button_text='Add', font=10)],
 
         ]
 
@@ -29,19 +29,26 @@ while True:
     match event:
         case Sg.WIN_CLOSED | 'Exit':
             break
+
         case 'Edit':
-            dozmiany = values['lista']
-            if len(dozmiany) < 1:
-                pass
+            if len(values['lista']) < 1:
+                pusta()
             else:
-                pass
-                # todos = edit(dozmiany)
-                # write(todos)
+                dozmiany = values['lista'][0]
+                todos_stored = read()
+                index_to_edit = todos_stored.index(dozmiany)
+                new_todos = edit(dozmiany)
+                todos_stored[index_to_edit] = new_todos
+                write(todos_stored)
+                window['lista'].update(read())
 
         case 'Add':
-            todos = read()
-            todos.append((data() + "  "+values[0]+"\n"))
-            write(todos)
-            window['lista'].update(todos)
+            if len(values['Add_f']) <1:
+                pusta_linia()
+            else:
+                todos = read()
+                todos.append((data() + "  "+values[0]+"\n"))
+                write(todos)
+                window['lista'].update(todos)
 
 window.close()

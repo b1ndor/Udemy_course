@@ -10,7 +10,10 @@ def edit(datainput):
         event, values = window2.read()
         match event:
             case "Cancel":
-                break
+                window2.close()
+                return datainput
+            case Sg.WIN_CLOSED:
+                return datainput
             case "Ok":
                 window2.close()
                 return values['edit']
@@ -36,7 +39,21 @@ def write(data):
 
 
 def pusta():
-    print('Lista jest pusta !')
+    layout = [[Sg.Text(text='Nic nie wybrałeś !')], [Sg.OK()]]
+    window_empty = Sg.Window(title='Nic nie wybrano', layout=layout)
+    event = window_empty.read()
+    match event:
+        case OK:
+            window_empty.close()
+
+
+def pusta_linia():
+    layout = [[Sg.Text(text='Nic nie wpisałeś !')], [Sg.OK(size=14)]]
+    window_empty = Sg.Window(title='Pusto ', layout=layout)
+    event = window_empty.read()
+    match event:
+        case OK:
+            window_empty.close()
 
 
 def data():
