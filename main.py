@@ -47,7 +47,7 @@ while True:
                 pusta_linia()
             else:
                 todos = read()
-                todos.append((data() + "  "+values[0]+"\n"))
+                todos.append((data() + "  "+values['Add_f']+"\n"))
                 write(todos)
                 window['lista'].update(todos)
 
