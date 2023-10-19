@@ -19,7 +19,7 @@ secondrow = \
 mainframe = [[Sg.Text(data())], [[firstrow, secondrow]]]
 
 # Create the Window
-window = Sg.Window(title='ToDo List', layout=mainframe)
+window = Sg.Window(title='ToDo List', layout=mainframe, icon='icon1.ico')
 
 
 # main body of program
@@ -43,7 +43,7 @@ while True:
                 window['lista'].update(read())
 
         case 'Add':
-            if len(values['Add_f']) <1:
+            if len(values['Add_f']) < 1:
                 pusta_linia()
             else:
                 todos = read()
