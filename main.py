@@ -14,8 +14,10 @@ firstrow = \
 secondrow = \
     [
         [Sg.Listbox(read(), font=13, size=(49, 16), expand_y=True, key="lista"),
-            Sg.Button(button_text='Edit', font=10)], Sg.Button(button_text='Exit', font=10)
+            Sg.Button(button_text='Edit', font=10), Sg.Button(button_text='Complete', font=10)],
+        Sg.Button(button_text='Exit', font=10)
     ]
+
 mainframe = [[Sg.Text(data())], [[firstrow, secondrow]]]
 
 # Create the Window
