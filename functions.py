@@ -19,10 +19,6 @@ def edit(datainput):
                 return values['edit']
 
 
-def complete():
-    pass
-
-
 def read():
     try:
         with open("data.tdo", 'r') as store_file:

@@ -14,7 +14,7 @@ firstrow = \
 secondrow = \
     [
         [Sg.Listbox(read(), font=13, size=(49, 16), expand_y=True, key="lista"),
-            Sg.Button(button_text='Edit', font=10), Sg.Button(button_text='Complete', font=10)],
+            Sg.Button(button_text='Edit', font=10), Sg.Button(button_text='Complete', font=10, key='Compl')],
         Sg.Button(button_text='Exit', font=10)
     ]
 
@@ -31,6 +31,13 @@ while True:
     match event:
         case Sg.WIN_CLOSED | 'Exit':
             break
+        case 'Compl':
+            compl = values['lista'][0]
+            todos_stored = read()
+            index_to_erase = todos_stored.index(compl)
+            todos_stored.pop(index_to_erase)
+            write(todos_stored)
+            window['lista'].update(read())
 
         case 'Edit':
             if len(values['lista']) < 1:
