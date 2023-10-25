@@ -32,13 +32,15 @@ while True:
         case Sg.WIN_CLOSED | 'Exit':
             break
         case 'Compl':
-            compl = values['lista'][0]
-            todos_stored = read()
-            index_to_erase = todos_stored.index(compl)
-            todos_stored.pop(index_to_erase)
-            write(todos_stored)
-            window['lista'].update(read())
-
+            try:
+                compl = values['lista'][0]
+                todos_stored = read()
+                index_to_erase = todos_stored.index(compl)
+                todos_stored.pop(index_to_erase)
+                write(todos_stored)
+                window['lista'].update(read())
+            except IndexError:
+                pass
         case 'Edit':
             if len(values['lista']) < 1:
                 pusta()
